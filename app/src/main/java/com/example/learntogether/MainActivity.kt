@@ -5,13 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,50 +39,61 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val scrollState= rememberScrollState()
+    val scrollState = rememberScrollState()
+
     Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-
-    )
-
-    {
-
-        androidx.compose.foundation.layout.Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(scrollState), // Ajout de défilement vertical
+        contentAlignment = Alignment.TopCenter // Alignement centré en haut
+    ) {
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally, // Aligne les textes au centre horizontalement
-
-        )
-
-        {
+           // Ajoute du padding général autour de la colonne
+        ) {
             DisplayImage(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(200.dp) // Limite la hauteur de l'image
             )
 
+            Spacer(modifier = Modifier.height(16.dp)) // Espace entre l'image et le texte
 
-
-
-        Text(
-            text = "Jetpack compose tutorial",
-            modifier = modifier.padding(top=6.dp),
-            fontSize = 24.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
-        )
-
-        Text(
-            text = "jetpack compose is a modern toolkit for building native android ui.compose simplifies and accelerates the development of android whith less code. powerfull tools,and intuitive kotlin APIs.",
-            modifier = modifier.padding(2.dp),
-            fontSize = 16.sp,
-        )
             Text(
-                text = "In this tutorial , you build a simple ui component with declarative functions.You call compose function to say what element you want and the compose is built around composable fucntions.this functions let you define your app's UI programmatically beacuse they let you describe how it should look and provide data dependencies, rather than focus on the process of the UI's construction, such as initializing an element and then attaching it to a parent.To create a composable function, you add the @Composable annotation to the function name  ",
-                modifier = modifier.padding(4.dp),
+                text = "Jetpack Compose Tutorial",
+                modifier = Modifier
+                    .padding( horizontal = 12.dp), // Ajout de padding à gauche et à droite
+                fontSize = 24.sp,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+
+            Spacer(modifier = Modifier.height(13.dp)) // Espace entre le titre et le paragraphe
+
+            Text(
+                text = "Jetpack Compose is a modern toolkit for building native Android UI. Compose simplifies and accelerates the development of Android apps with less code, powerful tools, and intuitive Kotlin APIs.",
+                modifier = Modifier
+                    .padding(horizontal = 14.dp), // Ajout de padding à gauche et à droite
+                fontSize = 16.sp,
+            )
+
+            Spacer(modifier = Modifier.height(18.dp)) // Espace entre les paragraphes
+
+            Text(
+                text = "In this tutorial, you build a simple UI component with declarative functions. You call compose functions to specify what elements you want, and Compose is built around composable functions. These functions let you define your app's UI programmatically because they allow you to describe how it should look and provide data dependencies, rather than focusing on the process of the UI's construction.",
+                modifier = Modifier
+                    .padding(horizontal = 14.dp), // Ajout de padding à gauche et à droite
                 fontSize = 16.sp,
             )
 
 
-    }
+
+            Text(
+                text = "To create a composable function, you add the @Composable annotation to the function name.",
+                modifier = Modifier
+                    .padding(horizontal = 14.dp), // Ajout de padding à gauche et à droite
+                fontSize = 16.sp,
+            )
+        }
     }
 }
 
@@ -102,7 +109,7 @@ fun GreetingPreview() {
 fun DisplayImage(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier.fillMaxSize(),
-        // Centrer l'image
+        contentAlignment = Alignment.Center // Centrer l'image
     ) {
         Image(
             painter = painterResource(id = R.drawable.compose), // Assurez-vous que 'compose' est bien dans res/drawable
